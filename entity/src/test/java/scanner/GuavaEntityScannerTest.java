@@ -3,7 +3,6 @@ package scanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.Set;
 
 import scannertestpackage.Test01;
@@ -13,7 +12,7 @@ class GuavaEntityScannerTest {
     GuavaEntityScanner guavaEntityScanner = new GuavaEntityScanner();
 
     @Test
-    void testScanEntity() throws IOException {
+    void testScanEntity() {
         // given
         final String testPackageName = "scannertestpackage";
         final String testFile = Test01.class.getName();
