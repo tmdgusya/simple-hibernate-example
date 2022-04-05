@@ -1,3 +1,4 @@
 rootProject.name = 'kotlin-event-driven-programming'
 include 'entity'
+include 'persistence'
 
