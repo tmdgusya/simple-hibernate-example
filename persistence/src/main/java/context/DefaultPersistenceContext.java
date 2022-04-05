@@ -42,6 +42,10 @@ public class DefaultPersistenceContext implements PersistenceContext {
     public boolean persist(Object entity) {
         Object id = entityScanner.getId(entity.getClass());
 
+        /**
+         * 이건 밖에서 판단하고 persist 는 저장만 하는 역할을 하는게 좋을 것 같다.
+         * Repository 계층을 만들면 밖으로 빼자.
+         */
         if (isChanged(id, entity)) {
             mergeEventProducer.produce(entity);
             persistenceContext.put(id, entity);
@@ -84,6 +88,10 @@ public class DefaultPersistenceContext implements PersistenceContext {
         return persistenceContext.containsValue(entity);
     }
 
+    /**
+     * 이건 밖에서 판단하고 persist 는 저장만 하는 역할을 하는게 좋을 것 같다.
+     * Repository 계층을 만들면 밖으로 빼자.
+     */
     private boolean isChanged(Object id, Object entity) {
         Object persistedEntity = persistenceContext.get(id);
         return persistedEntity.equals(entity);
