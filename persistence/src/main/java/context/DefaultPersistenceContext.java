@@ -42,7 +42,7 @@ public class DefaultPersistenceContext implements PersistenceContext {
     public boolean persist(Object entity) {
         Object id = entityScanner.getId(entity.getClass());
 
-        if (isDetached(id)) {
+        if (isChanged(id, entity)) {
             mergeEventProducer.produce(entity);
             persistenceContext.put(id, entity);
             return false;
@@ -82,5 +82,10 @@ public class DefaultPersistenceContext implements PersistenceContext {
     @Override
     public boolean isPersist(Object entity) {
         return persistenceContext.containsValue(entity);
+    }
+
+    private boolean isChanged(Object id, Object entity) {
+        Object persistedEntity = persistenceContext.get(id);
+        return persistedEntity.equals(entity);
     }
 }
