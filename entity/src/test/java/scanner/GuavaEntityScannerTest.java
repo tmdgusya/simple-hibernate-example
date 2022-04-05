@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import scannertestpackage.Test01;
+import scannertestpackage.Test02;
 
 class GuavaEntityScannerTest {
     GuavaEntityScanner guavaEntityScanner = new GuavaEntityScanner();
@@ -22,6 +23,7 @@ class GuavaEntityScannerTest {
 
         // then
         Assertions.assertTrue(result.contains(Test01.class));
+        Assertions.assertFalse(result.contains(Test02.class));
     }
 }
 
