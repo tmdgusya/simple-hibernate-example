@@ -11,11 +11,14 @@ import org.mockito.MockitoAnnotations;
 
 import context.DefaultPersistenceContext;
 import context.PersistenceContext;
+import scanner.DefaultEntityDirtyScanner;
+import scanner.EntityDirtyScanner;
 import testEntity.Entity01;
 
 class DefaultPersistEventConsumerTest {
     PersistenceContext defaultPersistenceContext = mock(DefaultPersistenceContext.class);
-    PersistEventConsumer defaultPersistEventConsumer = new DefaultPersistEventConsumer(defaultPersistenceContext);
+    EntityDirtyScanner entityDirtyScanner = mock(DefaultEntityDirtyScanner.class);
+    PersistEventConsumer defaultPersistEventConsumer = new DefaultPersistEventConsumer(defaultPersistenceContext, entityDirtyScanner);
 
     @BeforeEach
     void setUp() {

@@ -3,13 +3,16 @@ package event.persist;
 import com.google.common.eventbus.Subscribe;
 
 import context.PersistenceContext;
+import scanner.EntityDirtyScanner;
 
 public class DefaultPersistEventConsumer implements PersistEventConsumer {
 
     private final PersistenceContext defaultPersistenceContext;
+    private final EntityDirtyScanner entityDirtyScanner;
 
-    public DefaultPersistEventConsumer(PersistenceContext defaultPersistenceContext) {
+    public DefaultPersistEventConsumer(PersistenceContext defaultPersistenceContext, EntityDirtyScanner entityDirtyScanner) {
         this.defaultPersistenceContext = defaultPersistenceContext;
+        this.entityDirtyScanner = entityDirtyScanner;
     }
 
     @Override
