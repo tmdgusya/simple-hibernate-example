@@ -11,12 +11,12 @@ public class DefaultRepository<T, E> implements EntityRepository<T, E> {
     }
 
     @Override
-    public boolean save(Object entity) {
-        return false;
+    public boolean save(Object id, Object entity) {
+        return persistEventProducer.produce(id, entity);
     }
 
     @Override
-    public boolean remove(Object entity) {
+    public boolean remove(Object id) {
         return false;
     }
 
