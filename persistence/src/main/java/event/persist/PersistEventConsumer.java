@@ -2,6 +2,6 @@ package event.persist;
 
 public interface PersistEventConsumer {
 
-    boolean consume(PersistEvent persistEvent);
+    void consume(PersistEvent persistEvent);
 
 }

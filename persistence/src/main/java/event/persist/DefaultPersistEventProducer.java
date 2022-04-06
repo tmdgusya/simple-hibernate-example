@@ -11,8 +11,8 @@ public class DefaultPersistEventProducer implements PersistEventProducer {
     }
 
     @Override
-    public boolean produce(Object entity) {
-        PersistEvent persistEvent = new PersistEvent(entity);
+    public boolean produce(Object entityId, Object entity) {
+        PersistEvent persistEvent = new PersistEvent(entityId, entity);
         eventBus.post(persistEvent);
         return true;
     }

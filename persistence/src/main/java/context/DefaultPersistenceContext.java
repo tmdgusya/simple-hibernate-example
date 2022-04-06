@@ -3,36 +3,9 @@ package context;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import event.merge.MergeEventProducer;
-import event.persist.PersistEventProducer;
-import lombok.Builder;
-import scanner.EntityPropertyScanner;
-import scanner.GuavaEntityScanner;
-
 public class DefaultPersistenceContext implements PersistenceContext {
 
     private final Map<Object, Object> persistenceContext = new ConcurrentHashMap<>();
-    private final EntityPropertyScanner entityScanner;
-    private final MergeEventProducer mergeEventProducer;
-    private final PersistEventProducer persistEventProducer;
-
-    @Builder
-    public DefaultPersistenceContext(MergeEventProducer mergeEventProducer, PersistEventProducer persistEventProducer) {
-        this.entityScanner = new GuavaEntityScanner();
-        this.mergeEventProducer = mergeEventProducer;
-        this.persistEventProducer = persistEventProducer;
-    }
-
-    /**
-     * Custom EntityPropertyScanner 를 구현할 경우 DI 가 가능하다.
-     *
-     * @param entityScanner
-     */
-    public DefaultPersistenceContext(EntityPropertyScanner entityScanner, MergeEventProducer mergeEventProducer, PersistEventProducer persistEventProducer) {
-        this.entityScanner = entityScanner;
-        this.mergeEventProducer = mergeEventProducer;
-        this.persistEventProducer = persistEventProducer;
-    }
 
     /**
      * @param entity
@@ -44,12 +17,11 @@ public class DefaultPersistenceContext implements PersistenceContext {
          * 이건 밖에서 판단하고 persist 는 저장만 하는 역할을 하는게 좋을 것 같다.
          * Repository 계층을 만들면 밖으로 빼자.
          */
-        if (isChanged(id, entity)) {
-            mergeEventProducer.produce(entity);
-            persistenceContext.put(id, entity);
-            return false;
-        }
-        persistEventProducer.produce(entity);
+//        if (isChanged(id, entity)) {
+//            mergeEventProducer.produce(entity);
+//            persistenceContext.put(id, entity);
+//            return false;
+//        }
         persistenceContext.put(id, entity);
         return true;
     }
@@ -90,8 +62,8 @@ public class DefaultPersistenceContext implements PersistenceContext {
      * 이건 밖에서 판단하고 persist 는 저장만 하는 역할을 하는게 좋을 것 같다.
      * Repository 계층을 만들면 밖으로 빼자.
      */
-    private boolean isChanged(Object id, Object entity) {
-        Object persistedEntity = persistenceContext.get(id);
-        return persistedEntity != null && persistedEntity.equals(entity);
-    }
+//    private boolean isChanged(Object id, Object entity) {
+//        Object persistedEntity = persistenceContext.get(id);
+//        return persistedEntity != null && persistedEntity.equals(entity);
+//    }
 }
