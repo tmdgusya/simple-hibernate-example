@@ -24,6 +24,18 @@ class GuavaEntityScannerTest {
         Assertions.assertTrue(result.contains(Test01.class));
         Assertions.assertFalse(result.contains(Test02.class));
     }
+
+    @Test
+    void EmptySetIfNotExistEntityClassInGivenPackagePath() {
+        // given
+        final String testPackageName = "emptyentitypackage";
+
+        // when
+        Set<Class> result = guavaEntityScanner.scanEntity(testPackageName);
+
+        // then
+        Assertions.assertTrue(result.isEmpty());
+    }
 }
 
 //Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme
