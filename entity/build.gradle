@@ -18,7 +18,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "de.danielbechler.java-object-diff:0.95"
+    implementation 'org.javers:javers-core:6.6.3'
     implementation("com.google.guava:guava:31.1-jre")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
