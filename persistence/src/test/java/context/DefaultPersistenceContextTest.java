@@ -35,17 +35,18 @@ class DefaultPersistenceContextTest {
             .build();
 
     @Test
-    void testPersist() {
+    void 엔티티가_Persist_될때_PersistEvent가_Proucer_된다() {
         // given
-        Entity01 entity01 = new Entity01();
+        Long entityId = 1L;
+        Entity01 entity01 = new Entity01(entityId);
 
         // when
-        defaultPersistenceContext.persist(entity01);
+        defaultPersistenceContext.persist(entityId, entity01);
 
         // then
         Assertions.assertTrue(defaultPersistenceContext.isPersist(entity01));
         Assertions.assertTrue(spyPersistEventProducer.isExecuted());
-        Assertions.assertEquals(spyPersistEventProducer.sendEntityInfo.toString(), new Entity01().toString());
+        Assertions.assertEquals(spyPersistEventProducer.sendEntityInfo.toString(), new Entity01(entityId).toString());
         Assertions.assertTrue(defaultPersistEventConsumer.isExecuted());
     }
 
@@ -69,7 +70,7 @@ class DefaultPersistenceContextTest {
         public boolean isExecuted() {
             return produceCount != 0;
         }
-        
+
     }
 
     class SpyPersistEventConsumer extends DefaultPersistEventConsumer {

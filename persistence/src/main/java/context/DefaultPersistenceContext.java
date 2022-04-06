@@ -39,9 +39,7 @@ public class DefaultPersistenceContext implements PersistenceContext {
      * @return true (단순히 persist) / false (need merge)
      */
     @Override
-    public boolean persist(Object entity) {
-        Object id = entityScanner.getId(entity.getClass());
-
+    public boolean persist(Object id, Object entity) {
         /**
          * 이건 밖에서 판단하고 persist 는 저장만 하는 역할을 하는게 좋을 것 같다.
          * Repository 계층을 만들면 밖으로 빼자.
@@ -94,6 +92,6 @@ public class DefaultPersistenceContext implements PersistenceContext {
      */
     private boolean isChanged(Object id, Object entity) {
         Object persistedEntity = persistenceContext.get(id);
-        return persistedEntity.equals(entity);
+        return persistedEntity != null && persistedEntity.equals(entity);
     }
 }
