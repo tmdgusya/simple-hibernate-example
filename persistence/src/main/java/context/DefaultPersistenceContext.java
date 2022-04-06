@@ -58,6 +58,11 @@ public class DefaultPersistenceContext implements PersistenceContext {
         return persistenceContext.containsValue(entity);
     }
 
+    @Override
+    public Object getPersistenceEntity(Object id) {
+        return persistenceContext.get(id);
+    }
+
     /**
      * 이건 밖에서 판단하고 persist 는 저장만 하는 역할을 하는게 좋을 것 같다.
      * Repository 계층을 만들면 밖으로 빼자.

@@ -21,8 +21,12 @@ public class DefaultPersistEventConsumer implements PersistEventConsumer {
         Object entityId = persistEvent.getEntityId();
         Object entity = persistEvent.getEntity();
         if (defaultPersistenceContext.isPersist(entity)) {
-            // findDirty()
+            Object persistenceEntity = defaultPersistenceContext.getPersistenceEntity(entityId);
+            if (entityDirtyScanner.isDirty(persistenceEntity, entity)) {
+                // TODO DBStore Update
+            }
         }
         defaultPersistenceContext.persist(entityId, entity);
+        //TODO DBStore Insert
     }
 }

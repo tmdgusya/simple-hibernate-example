@@ -1,7 +1,7 @@
 package context;
 
 public interface PersistenceContext {
-    
+
     boolean persist(Object Id, Object entity);
 
     boolean detach(Object entity);
@@ -11,5 +11,7 @@ public interface PersistenceContext {
     boolean isDetached(Object id);
 
     boolean isPersist(Object entity);
+
+    Object getPersistenceEntity(Object id);
 
 }
