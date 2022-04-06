@@ -3,7 +3,7 @@ package scanner;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 
-import de.danielbechler.util.Assert;
+import util.Assert;
 
 public class DefaultEntityDirtyScanner implements EntityDirtyScanner {
 
@@ -20,7 +20,7 @@ public class DefaultEntityDirtyScanner implements EntityDirtyScanner {
                 .javers()
                 .build()
                 .compare(newer, older);
-        
+
         return compare.hasChanges();
     }
 
